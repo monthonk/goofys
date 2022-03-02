@@ -6,6 +6,7 @@
 : ${CACHE:="false"}
 : ${CLEANUP:="true"}
 : ${MOUNT_LOG:="mount.log"}
+: ${FILESIZE:=1}
 
 iter=10
 
@@ -251,7 +252,7 @@ function rm_files_parallel {
 }
 
 function write_large_file {
-    count=1000
+    count=$(( $FILESIZE * 1024 ))
     if [ "$FAST" == "true" ]; then
         count=100
     fi
@@ -283,7 +284,7 @@ fi
 function write_md5 {
     seed=$(dd if=/dev/urandom bs=128 count=1 status=none | base64 -w 0)
     random_cmd="openssl enc -aes-256-ctr -pbkdf2 -pass pass:$seed -nosalt"
-    count=2000
+    count=$(( $FILESIZE * 1024 ))
     if [ "$FAST" == "true" ]; then
         count=100
     fi

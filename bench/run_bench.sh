@@ -12,6 +12,7 @@ set -o pipefail
 : ${AWS_ACCESS_KEY_ID:=""}
 : ${AWS_SECRET_ACCESS_KEY:=""}
 : ${PROG:="s3fs"}
+: ${FILESIZE:=1}
 
 if [ $# = 1 ]; then
     t=$1
@@ -160,7 +161,7 @@ for fs in $PROG goofys; do
     fi
 done
 
-$dir/bench_format.py <(paste $dir/bench.goofys $dir/bench.$PROG) 2GB > $dir/bench.data
+$dir/bench_format.py <(paste $dir/bench.goofys $dir/bench.$PROG) "${FILESIZE}GB" > $dir/bench.data
 
 if [ "$CACHE" = "true" ]; then
     gnuplot -c $dir/bench_graph.gnuplot $dir/bench.data $dir/bench-cached.png \

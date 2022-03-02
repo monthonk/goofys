@@ -236,7 +236,7 @@ function create_files_parallel {
     get_howmany $@
 
     (for i in $(seq 1 $howmany); do
-        (echo $i > file$i && echo "created file$i") & true
+        echo $i > file$i & true
     done
     wait)
 }

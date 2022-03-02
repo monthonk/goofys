@@ -8,6 +8,8 @@ def filter_outliers(numbers, mean, std):
         return numbers
     return filter(lambda x: abs(x - mean) < 2 * std, numbers)
 
+filesize = sys.argv[2]
+
 op_str = {
     'create_files' : 'Create 100 files',
     'create_files_parallel' : 'Create 100 files (parallel)',
@@ -15,9 +17,9 @@ op_str = {
     'rm_files_parallel' : 'Unlink 100 files (parallel)',
     'ls_files' : 'ls with 1000 files',
     'find_files' : "`find' with 1000 dirs/files",
-    'write_md5' : 'Write 2GB',
+    'write_md5' : 'Write ' + filesize,
     'read_first_byte' : 'Time to 1st byte',
-    'read_md5' : 'Read 2GB',
+    'read_md5' : 'Read ' + filesize,
 }
 
 outputOrder = [

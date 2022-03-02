@@ -283,7 +283,7 @@ fi
 function write_md5 {
     seed=$(dd if=/dev/urandom bs=128 count=1 status=none | base64 -w 0)
     random_cmd="openssl enc -aes-256-ctr -pbkdf2 -pass pass:$seed -nosalt"
-    count=1000
+    count=2000
     if [ "$FAST" == "true" ]; then
         count=100
     fi

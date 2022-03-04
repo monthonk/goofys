@@ -30,9 +30,8 @@ RUN curl -L -O https://github.com/kahing/catfs/releases/download/v0.8.0/catfs &&
 # ideally I want to clear out all the go deps too but there's no
 # way to do that with ADD
 ENV PATH=$PATH:/root/go/bin
-RUN git clone https://github.com/monthonk/goofys.git -b update_bench /root/go/src/github.com/kahing/goofys && \
-    cd /root/go/src/github.com/kahing/goofys && \
-    make install
+ADD . /root/go/src/github.com/kahing/goofys
 WORKDIR /root/go/src/github.com/kahing/goofys
+RUN make install
 
 ENTRYPOINT ["/root/go/src/github.com/kahing/goofys/bench/run_bench.sh"]
